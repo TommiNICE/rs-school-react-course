@@ -8,6 +8,7 @@ interface SearchSectionProps {
 interface SearchSectionState {
   searchQuery: string;
   isLoading: boolean;
+  lastSearch: string;
 }
 
 class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
@@ -16,9 +17,16 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
     this.state = {
       searchQuery: '',
       isLoading: false,
+      lastSearch: '',
     };
   }
 
+  componentDidMount() {
+    const lastSearch = localStorage.getItem('lastSearch');
+    if (lastSearch) {
+      this.setState({ lastSearch });
+    }
+  }
   handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchQuery: event.target.value });
   };
@@ -37,6 +45,10 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
           (resource) => resource.value
         );
         this.props.onSearchResults(people);
+
+        // Save the search query to localStorage
+        localStorage.setItem('lastSearch', this.state.searchQuery);
+        this.setState({ lastSearch: this.state.searchQuery });
       } else {
         this.props.onSearchResults([]);
       }
@@ -55,7 +67,7 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
           type="text"
           value={this.state.searchQuery}
           onChange={this.handleInputChange}
-          placeholder="Search for people..."
+          placeholder={this.state.lastSearch}
         />
         <button type="submit" disabled={this.state.isLoading}>
           {this.state.isLoading ? 'Searching...' : 'Search'}
