@@ -27,18 +27,19 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
       this.setState({ lastSearch });
     }
   }
+
   handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchQuery: event.target.value });
+    const trimmedValue = event.target.value.trim();
+    this.setState({ searchQuery: trimmedValue });
   };
 
   handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+    const trimmedQuery = this.state.searchQuery.trim();
+    this.setState({ isLoading: true, searchQuery: trimmedQuery });
 
     try {
-      const searchResult = await swapi.People.findBySearch([
-        this.state.searchQuery,
-      ]);
+      const searchResult = await swapi.People.findBySearch([trimmedQuery]);
       console.log('Search results:', searchResult);
       if (searchResult && searchResult.resources) {
         const people: swapi.IPeople[] = searchResult.resources.map(
@@ -46,9 +47,8 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
         );
         this.props.onSearchResults(people);
 
-        // Save the search query to localStorage
-        localStorage.setItem('lastSearch', this.state.searchQuery);
-        this.setState({ lastSearch: this.state.searchQuery });
+        localStorage.setItem('lastSearch', trimmedQuery);
+        this.setState({ lastSearch: trimmedQuery });
       } else {
         this.props.onSearchResults([]);
       }

@@ -17,6 +17,7 @@ class ResultSection extends React.Component<ResultSectionProps> {
             {results.map((person, index) => (
               <li key={index}>
                 <h3>{person.name}</h3>
+                <p>Birth Year: {person.birth_year}</p>
                 <p>Height: {person.height}</p>
                 <p>Mass: {person.mass}</p>
                 <p>Hair Color: {person.hair_color}</p>
