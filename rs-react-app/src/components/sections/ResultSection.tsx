@@ -13,18 +13,20 @@ class ResultSection extends React.Component<ResultSectionProps> {
       <div>
         <h2>Search Results:</h2>
         {results.length > 0 ? (
-          <ul>
+          <ol>
             {results.map((person, index) => (
               <li key={index}>
                 <h3>{person.name}</h3>
-                <p>Birth Year: {person.birth_year}</p>
-                <p>Height: {person.height}</p>
-                <p>Mass: {person.mass}</p>
-                <p>Hair Color: {person.hair_color}</p>
-                <p>Eye Color: {person.eye_color}</p>
+                <ul>
+                  <li>Birth Year: {person.birth_year}</li>
+                  <li>Height: {person.height}</li>
+                  <li>Mass: {person.mass}</li>
+                  <li>Hair Color: {person.hair_color}</li>
+                  <li>Eye Color: {person.eye_color}</li>
+                </ul>
               </li>
             ))}
-          </ul>
+          </ol>
         ) : (
           <p>No results found.</p>
         )}
