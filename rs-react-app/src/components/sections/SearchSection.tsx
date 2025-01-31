@@ -1,5 +1,7 @@
 import { Component, ChangeEvent, FormEvent } from 'react';
 import * as swapi from 'swapi-ts';
+import Spinner from '../Spinner';
+import '../Spinner.css';
 
 interface SearchSectionProps {
   onSearchResults: (results: swapi.IPeople[]) => void;
@@ -70,7 +72,7 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
           placeholder={this.state.lastSearch}
         />
         <button type="submit" disabled={this.state.isLoading}>
-          {this.state.isLoading ? 'Searching...' : 'Search'}
+          {this.state.isLoading ? <Spinner /> : 'Search'}
         </button>
       </form>
     );
