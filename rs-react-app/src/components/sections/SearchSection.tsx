@@ -2,7 +2,7 @@ import { Component, ChangeEvent, FormEvent } from 'react';
 import * as swapi from 'swapi-ts';
 
 interface SearchSectionProps {
-  onSearchResults: (results: any[]) => void;
+  onSearchResults: (results: swapi.IPeople[]) => void;
 }
 
 interface SearchSectionState {
@@ -28,11 +28,20 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
     this.setState({ isLoading: true });
 
     try {
-      const results = await swapi.Planets.findBySearch([this.state.searchQuery]);
-      console.log('Search results:', results);
-      this.props.onSearchResults(results);
+      const searchResult = await swapi.People.findBySearch([
+        this.state.searchQuery,
+      ]);
+      console.log('Search results:', searchResult);
+      if (searchResult && searchResult.resources) {
+        const people: swapi.IPeople[] = searchResult.resources.map(
+          (resource) => resource.value
+        );
+        this.props.onSearchResults(people);
+      } else {
+        this.props.onSearchResults([]);
+      }
     } catch (error) {
-      console.error('Error searching for planets:', error);
+      console.error('Error searching for people:', error);
       this.props.onSearchResults([]);
     } finally {
       this.setState({ isLoading: false });
@@ -46,7 +55,7 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
           type="text"
           value={this.state.searchQuery}
           onChange={this.handleInputChange}
-          placeholder="Search for planets..."
+          placeholder="Search for people..."
         />
         <button type="submit" disabled={this.state.isLoading}>
           {this.state.isLoading ? 'Searching...' : 'Search'}
