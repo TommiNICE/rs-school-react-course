@@ -3,6 +3,8 @@ import * as swapi from 'swapi-ts';
 import SearchSection from './components/sections/SearchSection';
 import ResultSection from './components/sections/ResultSection';
 import ErrorBoundary from './components/ErrorBoundary';
+import Header from './components/Header';
+
 
 interface AppState {
   searchResults: swapi.IPeople[];
@@ -24,6 +26,7 @@ class App extends Component<object, AppState> {
     return (
       <ErrorBoundary>
         <div className="App">
+          <Header />
           <main>
             <SearchSection onSearchResults={this.handleSearchResults} />
             <ResultSection results={this.state.searchResults} />
