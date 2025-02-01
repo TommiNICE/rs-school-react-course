@@ -26,6 +26,10 @@ class ErrorBoundary extends Component<Props, State> {
     this.setState({ errorInfo });
     console.error('Uncaught error:', error);
     console.error('Error Info:', errorInfo);
+    console.log('Error Boundary Report:', {
+      error: error.toString(),
+      componentStack: errorInfo.componentStack,
+    });
   }
 
   render() {
