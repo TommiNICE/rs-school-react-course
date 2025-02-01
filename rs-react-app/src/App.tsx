@@ -32,7 +32,9 @@ class App extends Component<object, AppState> {
             <main>
               <SearchSection onSearchResults={this.handleSearchResults} />
               <ResultSection results={this.state.searchResults} />
-              <ErrorButton />
+              <div className="error-button-container">
+                <ErrorButton />
+              </div>
             </main>
           </div>
         </div>
