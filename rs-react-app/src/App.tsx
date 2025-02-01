@@ -3,6 +3,7 @@ import * as swapi from 'swapi-ts';
 import SearchSection from './components/sections/SearchSection';
 import ResultSection from './components/sections/ResultSection';
 import ErrorBoundary from './components/ErrorBoundary';
+import ErrorButton from './components/ErrorButton';
 import Header from './components/Header';
 import './App.css'; // Import the CSS file
 
@@ -31,6 +32,7 @@ class App extends Component<object, AppState> {
             <main>
               <SearchSection onSearchResults={this.handleSearchResults} />
               <ResultSection results={this.state.searchResults} />
+              <ErrorButton />
             </main>
           </div>
         </div>
