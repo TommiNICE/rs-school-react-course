@@ -57,6 +57,26 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
     } catch (error) {
       console.error('Error searching for people:', error);
       this.props.onSearchResults([]);
+      if (error instanceof Error) {
+        if ('status' in error) {
+          const httpError = error as { status: number };
+          switch (httpError.status) {
+            case 404:
+              alert('No results found. Please try a different search term.');
+              break;
+            case 429:
+              alert('Too many requests. Please wait a moment and try again.');
+              break;
+            case 500:
+              alert('Server error. Please try again later.');
+              break;
+            default:
+              alert(`An error occurred: ${error.message}`);
+          }
+        } else {
+          alert(`An unexpected error occurred: ${error.message}`);
+        }
+      }
     } finally {
       this.setState({ isLoading: false });
     }
