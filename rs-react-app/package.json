@@ -3,12 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/TommiNICE/rs-school-react-course/rs-react-app",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -e rs-react-app"
   },
   "dependencies": {
     "react": "^18.3.1",
