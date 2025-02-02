@@ -2,6 +2,7 @@ import { Component, ChangeEvent, FormEvent } from 'react';
 import * as swapi from 'swapi-ts';
 import Spinner from '../Spinner';
 import '../Spinner.css';
+import './SearchSection.css';
 
 interface SearchSectionProps {
   onSearchResults: (results: swapi.IPeople[]) => void;
@@ -84,7 +85,7 @@ class SearchSection extends Component<SearchSectionProps, SearchSectionState> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="search-container">
         <input
           type="text"
           value={this.state.searchQuery}
