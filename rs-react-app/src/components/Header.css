@@ -1,0 +1,18 @@
+.star-wars-header {
+  background-image: url('https://wallpaperaccess.com/full/11836.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffe81f;
+  text-align: center;
+  padding: 20px;
+}
+
+.star-wars-header h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
