@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tomminice.github.io/rs-school-react-course/rs-react-app",
+  "homepage": "https://tomminice.github.io/rs-school-react-course/rs-react-app/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
